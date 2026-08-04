@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prajwal Neupane — Researcher</title>
+<style>
+  :root{
+    --navy:#1c2430;
+    --accent:#3b5bdb;
+    --bg-light:#f4f6f9;
+    --text-dark:#20242c;
+    --text-muted:#5b6472;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Segoe UI', Helvetica, Arial, sans-serif; color:var(--text-dark); background:var(--bg-light);}
+  a{text-decoration:none; color:inherit;}
+
+  /* NAV */
+  header{
+    position:relative;
+    background:linear-gradient(135deg,#232b3a 0%, #2f3b52 45%, #1b2230 100%);
+    color:#fff;
+    overflow:hidden;
+  }
+  header::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(255,255,255,0.05) 0, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(255,255,255,0.05) 0, transparent 40%);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:22px 40px;
+    position:relative; z-index:2;
+    flex-wrap:wrap; gap:12px;
+  }
+  .site-title{font-size:1.3rem; font-weight:700; letter-spacing:.5px;}
+  .nav-links{display:flex; gap:30px; flex-wrap:wrap;}
+  .nav-links a{
+    font-size:.98rem; padding-bottom:6px; border-bottom:2px solid transparent;
+    transition:border-color .2s;
+    cursor:pointer;
+  }
+  .nav-links a.active{border-bottom-color:var(--accent); font-weight:600;}
+  .nav-links a:hover{border-bottom-color:rgba(255,255,255,0.5);}
+
+  .hero{
+    position:relative; z-index:2;
+    padding:100px 40px 90px;
+    max-width:900px;
+  }
+  .hero h1{font-size:3.2rem; letter-spacing:1px; font-weight:800;}
+  .hero .underline{width:110px; height:4px; background:var(--accent); margin:16px 0 26px;}
+  .hero h2{font-size:1.5rem; font-weight:500; margin-bottom:10px;}
+  .hero p{font-size:1.05rem; color:#d6dae2;}
+
+  /* MAIN CONTENT AREA */
+  main{max-width:1100px; margin:0 auto; padding:50px 40px 100px;}
+  section{display:none;}
+  section.active{display:block; animation:fade .3s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+
+  .section-title{font-size:1.8rem; font-weight:800; letter-spacing:.5px; margin-bottom:28px;}
+
+  /* ABOUT */
+  .about-grid{display:flex; gap:50px; flex-wrap:wrap;}
+  .about-photo{
+    width:280px; height:340px; flex-shrink:0;
+    background:#dfe3ea;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--text-muted); font-size:.9rem; text-align:center; padding:20px;
+    border-radius:6px;
+  }
+  .about-text{flex:1; min-width:280px;}
+  .about-header-row{display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:20px;}
+  .social-icons{display:flex; gap:16px;}
+  .social-icons a{
+    width:38px; height:38px; border-radius:50%;
+    background:#e7eaf0; display:flex; align-items:center; justify-content:center;
+    font-size:1rem; color:var(--text-dark);
+  }
+  .edu-line{margin:14px 0; font-size:1.02rem;}
+  .about-text p{margin:16px 0; line-height:1.7; color:#3a4150;}
+  .placeholder-note{
+    display:inline-block; margin-top:20px; padding:8px 14px;
+    background:#fff4d6; border:1px dashed #d9b95c; border-radius:4px;
+    font-size:.85rem; color:#7a5b12;
+  }
+
+  /* GENERIC LIST / CARD STYLES for other sections */
+  .card{
+    background:#fff; border:1px solid #e3e6ec; border-radius:6px;
+    padding:22px 24px; margin-bottom:18px;
+  }
+  .card h3{font-size:1.1rem; margin-bottom:6px;}
+  .card .meta{font-size:.85rem; color:var(--text-muted); margin-bottom:10px;}
+  .card p{color:#3a4150; line-height:1.6;}
+
+  .photo-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:18px;}
+  .photo-placeholder{
+    aspect-ratio:4/3; background:#dfe3ea; border-radius:6px;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--text-muted); font-size:.85rem; text-align:center; padding:12px;
+  }
+
+  .timeline-item{border-left:3px solid var(--accent); padding-left:20px; margin-bottom:26px; position:relative;}
+  .timeline-item::before{content:""; position:absolute; left:-8px; top:2px; width:13px; height:13px; border-radius:50%; background:var(--accent);}
+
+  footer{
+    text-align:center; padding:30px; font-size:.85rem; color:var(--text-muted);
+    border-top:1px solid #e3e6ec;
+  }
+
+  @media(max-width:700px){
+    .hero{padding:70px 24px 60px;}
+    .hero h1{font-size:2.2rem;}
+    main{padding:40px 24px 70px;}
+    nav{padding:18px 20px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="site-title">prajwalneupane88.com.np</div>
+    <div class="nav-links">
+      <a data-target="about" class="active">About</a>
+      <a data-target="research">Research</a>
+      <a data-target="photos">Field Photos</a>
+      <a data-target="publications">Publications</a>
+      <a data-target="experience">Work Experience</a>
+      <a data-target="notes">Notes</a>
+    </div>
+  </nav>
+  <div class="hero">
+    <h1>PRAJWAL NEUPANE</h1>
+    <div class="underline"></div>
+    <h2>Researcher</h2>
+    <p>[Add your research interests here — e.g. Field 1, Field 2, Field 3]</p>
+  </div>
+</header>
+
+<main>
+
+  <section id="about" class="active">
+    <div class="about-grid">
+      <div class="about-photo">Your photo here<br>(recommended 500×600px)</div>
+      <div class="about-text">
+        <div class="about-header-row">
+          <h2 class="section-title" style="margin-bottom:0;">ABOUT ME</h2>
+          <div class="social-icons">
+            <a href="mailto:prajwalneupane52@gmail.com" title="Email">✉</a>
+            <a href="#" title="LinkedIn">in</a>
+            <a href="#" title="Google Scholar">🎓</a>
+            <a href="#" title="Instagram">📷</a>
+          </div>
+        </div>
+        <p class="edu-line"><strong>MS</strong> - [Your university name]</p>
+        <p class="edu-line"><strong>BS</strong> - [Your university name]</p>
+        <p>I am a [your field] researcher based in [your location] specializing in [your specialty areas]. My work focuses on [one-line description of what you study or build].</p>
+        <p>[Add another paragraph about your background, methods, or what drew you to this field.]</p>
+        <span class="placeholder-note">Placeholder content — edit this section with your real bio, photo, and links.</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="research">
+    <h2 class="section-title">RESEARCH</h2>
+    <div class="card">
+      <h3>[Research project or theme title]</h3>
+      <div class="meta">[Year range] · [Location or collaborators]</div>
+      <p>[Short description of this research project — objectives, methods, and findings.]</p>
+    </div>
+    <div class="card">
+      <h3>[Second research theme title]</h3>
+      <div class="meta">[Year range] · [Location or collaborators]</div>
+      <p>[Short description of this research project.]</p>
+    </div>
+  </section>
+
+  <section id="photos">
+    <h2 class="section-title">FIELD PHOTOS</h2>
+    <div class="photo-grid">
+      <div class="photo-placeholder">Photo 1</div>
+      <div class="photo-placeholder">Photo 2</div>
+      <div class="photo-placeholder">Photo 3</div>
+      <div class="photo-placeholder">Photo 4</div>
+      <div class="photo-placeholder">Photo 5</div>
+      <div class="photo-placeholder">Photo 6</div>
+    </div>
+  </section>
+
+  <section id="publications">
+    <h2 class="section-title">PUBLICATIONS</h2>
+    <div class="card">
+      <h3>[Author list]. ([Year]). [Paper title].</h3>
+      <div class="meta">[Journal name], [volume(issue)], [pages]. [DOI or link]</div>
+    </div>
+    <div class="card">
+      <h3>[Author list]. ([Year]). [Paper title].</h3>
+      <div class="meta">[Journal name], [volume(issue)], [pages]. [DOI or link]</div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2 class="section-title">WORK EXPERIENCE</h2>
+    <div class="timeline-item">
+      <h3>[Job title]</h3>
+      <div class="meta">[Organization] · [Start date] – [End date]</div>
+      <p>[Brief description of responsibilities and achievements.]</p>
+    </div>
+    <div class="timeline-item">
+      <h3>[Job title]</h3>
+      <div class="meta">[Organization] · [Start date] – [End date]</div>
+      <p>[Brief description of responsibilities and achievements.]</p>
+    </div>
+  </section>
+
+  <section id="notes">
+    <h2 class="section-title">NOTES</h2>
+    <div class="card">
+      <h3>[Note or blog post title]</h3>
+      <div class="meta">[Date]</div>
+      <p>[Short excerpt or note content.]</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  &copy; <span id="year"></span> Prajwal Neupane · prajwalneupane88.com.np
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const links = document.querySelectorAll('.nav-links a');
+  const sections = document.querySelectorAll('main section');
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      links.forEach(l => l.classList.remove('active'));
+      sections.forEach(s => s.classList.remove('active'));
+      link.classList.add('active');
+      document.getElementById(link.dataset.target).classList.add('active');
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  });
+</script>
+
+</body>
+</html>
