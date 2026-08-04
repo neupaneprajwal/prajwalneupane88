@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Prajwal Neupane — Researcher</title>
+<title>Prajwal Neupane — Geoscientist</title>
 <style>
   :root{
     --navy:#1c2430;
@@ -58,6 +58,8 @@
   .hero .underline{width:110px; height:4px; background:var(--accent); margin:16px 0 26px;}
   .hero h2{font-size:1.5rem; font-weight:500; margin-bottom:10px;}
   .hero p{font-size:1.05rem; color:#d6dae2;}
+  .hero-page-block{display:none;}
+  .hero-page-block .underline{margin-bottom:0;}
 
   /* MAIN CONTENT AREA */
   main{max-width:1100px; margin:0 auto; padding:50px 40px 100px;}
@@ -139,10 +141,16 @@
     </div>
   </nav>
   <div class="hero">
-    <h1>PRAJWAL NEUPANE</h1>
-    <div class="underline"></div>
-    <h2>Geophysicist | Geologist</h2>
-    <p>Geophysics, Reflection Sesimology, Tectonics</p>
+    <div id="hero-about-block">
+      <h1>PRAJWAL NEUPANE</h1>
+      <div class="underline"></div>
+      <h2>Geophysicist | Geologist</h2>
+      <p>Geophysics, Reflection Seismology, Tectonics</p>
+    </div>
+    <div id="hero-page-block" class="hero-page-block">
+      <h1 id="hero-page-title">SECTION</h1>
+      <div class="underline"></div>
+    </div>
   </div>
 </header>
 
@@ -158,7 +166,9 @@
             <a href="mailto:prajwalneupane52@gmail.com" title="Email">✉</a>
             <a href="https://www.linkedin.com/in/prajwal-neupane52/" title="LinkedIn" target="_blank" rel="noopener">in</a>
             <a href="https://scholar.google.com/citations?user=23WU3WYAAAAJ&hl=en" title="Google Scholar" target="_blank" rel="noopener">🎓</a>
-            <a href="https://www.instagram.com/neupaneprajwal_/" title="Instagram" target="_blank" rel="noopener">📷</a>
+            <a href="https://www.instagram.com/neupaneprajwal_/" title="Instagram" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg>
+            </a>
           </div>
         </div>
         <p class="edu-line"><strong>PhD Candidate</strong> - Southern Methodist University, Dallas, USA</p>
@@ -168,7 +178,6 @@
         <p>My expertise spans seismic data acquisition, processing, and interpretation, including multichannel seismic surveying, seismic station deployment, and monitoring. I also bring hands-on geological mapping experience from fieldwork in the Himalayan terrain.</p>
         <p>My long-term goal is to apply my geophysical and geological expertise to solving complex subsurface exploration problems.
         </p>
-        <!-- <span class="placeholder-note">Placeholder content — edit this section with your real bio, photo, and links.</span> -->
       </div>
     </div>
   </section>
@@ -244,12 +253,23 @@
   document.getElementById('year').textContent = new Date().getFullYear();
   const links = document.querySelectorAll('.nav-links a');
   const sections = document.querySelectorAll('main section');
+  const heroAbout = document.getElementById('hero-about-block');
+  const heroPage = document.getElementById('hero-page-block');
+  const heroPageTitle = document.getElementById('hero-page-title');
   links.forEach(link => {
     link.addEventListener('click', () => {
       links.forEach(l => l.classList.remove('active'));
       sections.forEach(s => s.classList.remove('active'));
       link.classList.add('active');
       document.getElementById(link.dataset.target).classList.add('active');
+      if(link.dataset.target === 'about'){
+        heroAbout.style.display = 'block';
+        heroPage.style.display = 'none';
+      } else {
+        heroAbout.style.display = 'none';
+        heroPage.style.display = 'block';
+        heroPageTitle.textContent = link.textContent.toUpperCase();
+      }
       window.scrollTo({top:0, behavior:'smooth'});
     });
   });
