@@ -149,7 +149,24 @@
     aspect-ratio:4/3; background:#dfe3ea; border-radius:6px;
     display:flex; align-items:center; justify-content:center;
     color:var(--text-muted); font-size:.85rem; text-align:center; padding:12px;
+    overflow:hidden;
   }
+  .photo-placeholder img{width:100%; height:100%; object-fit:cover; border-radius:6px;}
+
+  /* ALBUM TABS */
+  .album-tabs{
+    display:flex; gap:10px; flex-wrap:wrap; margin-bottom:26px;
+    border-bottom:1px solid #e3e6ec; padding-bottom:14px;
+  }
+  .album-tabs a{
+    padding:8px 16px; border-radius:20px; font-size:.9rem;
+    background:#e7eaf0; color:var(--text-muted); cursor:pointer;
+    transition:background .15s, color .15s;
+  }
+  .album-tabs a:hover{background:#dde1e9;}
+  .album-tabs a.active{background:var(--accent); color:#fff; font-weight:600;}
+  .album-panel{display:none;}
+  .album-panel.active{display:block; animation:fade .3s ease;}
 
   .timeline-item{border-left:3px solid var(--accent); padding-left:20px; margin-bottom:26px; position:relative;}
   .timeline-item::before{content:""; position:absolute; left:-8px; top:2px; width:13px; height:13px; border-radius:50%; background:var(--accent);}
@@ -231,13 +248,56 @@
 
   <section id="photos">
     <h2 class="section-title">FIELD PHOTOS</h2>
-    <div class="photo-grid">
-      <div class="photo-placeholder">Photo 1</div>
-      <div class="photo-placeholder">Photo 2</div>
-      <div class="photo-placeholder">Photo 3</div>
-      <div class="photo-placeholder">Photo 4</div>
-      <div class="photo-placeholder">Photo 5</div>
-      <div class="photo-placeholder">Photo 6</div>
+
+    <div class="album-tabs">
+      <a data-album="nmsz" class="active">New Madrid Seismic Zone</a>
+      <a data-album="butte">Butte Valley, CA</a>
+      <a data-album="hetauda">Hetauda Dun Valley, Nepal</a>
+      <a data-album="hft">Himalayan Frontal Thrust, Nepal</a>
+    </div>
+
+    <div class="album-panel active" id="album-nmsz">
+      <div class="photo-grid">
+        <div class="photo-placeholder">Photo 1</div>
+        <div class="photo-placeholder">Photo 2</div>
+        <div class="photo-placeholder">Photo 3</div>
+        <div class="photo-placeholder">Photo 4</div>
+        <div class="photo-placeholder">Photo 5</div>
+        <div class="photo-placeholder">Photo 6</div>
+      </div>
+    </div>
+
+    <div class="album-panel" id="album-butte">
+      <div class="photo-grid">
+        <div class="photo-placeholder">Photo 1</div>
+        <div class="photo-placeholder">Photo 2</div>
+        <div class="photo-placeholder">Photo 3</div>
+        <div class="photo-placeholder">Photo 4</div>
+        <div class="photo-placeholder">Photo 5</div>
+        <div class="photo-placeholder">Photo 6</div>
+      </div>
+    </div>
+
+    <div class="album-panel" id="album-hetauda">
+      <div class="photo-grid">
+        <div class="photo-placeholder">Photo 1</div>
+        <div class="photo-placeholder">Photo 2</div>
+        <div class="photo-placeholder">Photo 3</div>
+        <div class="photo-placeholder">Photo 4</div>
+        <div class="photo-placeholder">Photo 5</div>
+        <div class="photo-placeholder">Photo 6</div>
+      </div>
+    </div>
+
+    <div class="album-panel" id="album-hft">
+      <div class="photo-grid">
+        <div class="photo-placeholder">Photo 1</div>
+        <div class="photo-placeholder">Photo 2</div>
+        <div class="photo-placeholder">Photo 3</div>
+        <div class="photo-placeholder">Photo 4</div>
+        <div class="photo-placeholder">Photo 5</div>
+        <div class="photo-placeholder">Photo 6</div>
+      </div>
     </div>
   </section>
 
@@ -328,6 +388,18 @@
       link.classList.add('active');
       document.getElementById(link.dataset.target).classList.add('active');
       window.scrollTo({top:0, behavior:'smooth'});
+    });
+  });
+
+  // Field Photos album tabs
+  const albumTabs = document.querySelectorAll('.album-tabs a');
+  const albumPanels = document.querySelectorAll('.album-panel');
+  albumTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      albumTabs.forEach(t => t.classList.remove('active'));
+      albumPanels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('album-' + tab.dataset.album).classList.add('active');
     });
   });
 </script>
