@@ -58,6 +58,8 @@
   .hero .underline{width:110px; height:4px; background:var(--accent); margin:16px 0 26px;}
   .hero h2{font-size:1.5rem; font-weight:500; margin-bottom:10px;}
   .hero p{font-size:1.05rem; color:#d6dae2;}
+  .hero-sub{display:none;}
+  .hero-sub.show{display:block;}
 
   /* MAIN CONTENT AREA */
   main{max-width:1100px; margin:0 auto; padding:50px 40px 100px;}
@@ -190,19 +192,21 @@
   <nav>
     <div class="site-title">prajwalneupane88.com.np</div>
     <div class="nav-links">
-      <a data-target="about" class="active">About</a>
-      <a data-target="research">Research</a>
-      <a data-target="photos">Field Photos</a>
-      <a data-target="publications">Publications</a>
-      <a data-target="experience">Work Experience</a>
-      <a data-target="notes">Notes</a>
+      <a data-target="about" data-hero="PRAJWAL NEUPANE" class="active">About</a>
+      <a data-target="research" data-hero="RESEARCH">Research</a>
+      <a data-target="photos" data-hero="FIELD PHOTOS">Field Photos</a>
+      <a data-target="publications" data-hero="PUBLICATIONS">Publications</a>
+      <a data-target="experience" data-hero="WORK EXPERIENCE">Work Experience</a>
+      <a data-target="notes" data-hero="NOTES">Notes</a>
     </div>
   </nav>
   <div class="hero">
-    <h1>PRAJWAL NEUPANE</h1>
+    <h1 id="hero-title">PRAJWAL NEUPANE</h1>
     <div class="underline"></div>
-    <h2>Geophysicist | Geologist</h2>
-    <p>Geophysics, Reflection Seismology, Tectonics</p>
+    <div class="hero-sub show" id="hero-sub">
+      <h2>Geophysicist | Geologist</h2>
+      <p>Geophysics, Reflection Seismology, Tectonics</p>
+    </div>
   </div>
 </header>
 
@@ -302,7 +306,7 @@
   </section>
 
   <section id="publications">
-    <h2 class="section-title">KEY PUBLICATIONS</h2>
+    <h2 class="section-title">PUBLICATIONS</h2>
 
     <a class="pub-card" href="https://doi.org/10.1785/0220250104" target="_blank" rel="noopener">
       <h3>Mapping New Subsurface Faults in the Butte Valley, Northern California</h3>
@@ -346,9 +350,6 @@
       <svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
     </a>
 
-    <h2 class="section-title">CONFERENCES</h2>
-
-
   </section>
 
   <section id="experience">
@@ -384,12 +385,16 @@
   document.getElementById('year').textContent = new Date().getFullYear();
   const links = document.querySelectorAll('.nav-links a');
   const sections = document.querySelectorAll('main section');
+  const heroTitle = document.getElementById('hero-title');
+  const heroSub = document.getElementById('hero-sub');
   links.forEach(link => {
     link.addEventListener('click', () => {
       links.forEach(l => l.classList.remove('active'));
       sections.forEach(s => s.classList.remove('active'));
       link.classList.add('active');
       document.getElementById(link.dataset.target).classList.add('active');
+      heroTitle.textContent = link.dataset.hero;
+      heroSub.classList.toggle('show', link.dataset.target === 'about');
       window.scrollTo({top:0, behavior:'smooth'});
     });
   });
