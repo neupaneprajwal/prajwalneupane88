@@ -58,8 +58,6 @@
   .hero .underline{width:110px; height:4px; background:var(--accent); margin:16px 0 26px;}
   .hero h2{font-size:1.5rem; font-weight:500; margin-bottom:10px;}
   .hero p{font-size:1.05rem; color:#d6dae2;}
-  .hero-sub{display:none;}
-  .hero-sub.show{display:block;}
 
   /* MAIN CONTENT AREA */
   main{max-width:1100px; margin:0 auto; padding:50px 40px 100px;}
@@ -153,7 +151,10 @@
     color:var(--text-muted); font-size:.85rem; text-align:center; padding:12px;
     overflow:hidden;
   }
-  .photo-placeholder img{width:100%; height:100%; object-fit:cover; border-radius:6px; cursor:pointer; transition:transform .2s;}
+  .photo-placeholder img{
+    width:100%; height:100%; object-fit:cover; border-radius:6px;
+    cursor:pointer; transition:transform .2s;
+  }
   .photo-placeholder img:hover{transform:scale(1.03);}
 
   /* LIGHTBOX */
@@ -187,25 +188,8 @@
     .lightbox-prev{left:8px;} .lightbox-next{right:8px;}
   }
 
-  /* ALBUM TABS */
-  .album-tabs{
-    display:flex; gap:10px; flex-wrap:wrap; margin-bottom:26px;
-    border-bottom:1px solid #e3e6ec; padding-bottom:14px;
-  }
-  .album-tabs a{
-    padding:8px 16px; border-radius:20px; font-size:.9rem;
-    background:#e7eaf0; color:var(--text-muted); cursor:pointer;
-    transition:background .15s, color .15s;
-  }
-  .album-tabs a:hover{background:#dde1e9;}
-  .album-tabs a.active{background:var(--accent); color:#fff; font-weight:600;}
-  .album-panel{display:none;}
-  .album-panel.active{display:block; animation:fade .3s ease;}
-
   .timeline-item{border-left:3px solid var(--accent); padding-left:20px; margin-bottom:26px; position:relative;}
   .timeline-item::before{content:""; position:absolute; left:-8px; top:2px; width:13px; height:13px; border-radius:50%; background:var(--accent);}
-  .timeline-item ul{margin:10px 0 0 20px; color:#3a4150; line-height:1.6;}
-  .timeline-item ul li{margin-bottom:6px;}
 
   footer{
     text-align:center; padding:30px; font-size:.85rem; color:var(--text-muted);
@@ -226,21 +210,19 @@
   <nav>
     <div class="site-title">prajwalneupane88.com.np</div>
     <div class="nav-links">
-      <a data-target="about" data-hero="PRAJWAL NEUPANE" class="active">About</a>
-      <a data-target="research" data-hero="RESEARCH">Research</a>
-      <a data-target="photos" data-hero="FIELD PHOTOS">Field Photos</a>
-      <a data-target="publications" data-hero="PUBLICATIONS">Publications</a>
-      <a data-target="experience" data-hero="WORK EXPERIENCE">Work Experience</a>
-      <a data-target="notes" data-hero="NOTES">Notes</a>
+      <a data-target="about" class="active">About</a>
+      <a data-target="research">Research</a>
+      <a data-target="photos">Field Photos</a>
+      <a data-target="publications">Publications</a>
+      <a data-target="experience">Work Experience</a>
+      <a data-target="notes">Notes</a>
     </div>
   </nav>
   <div class="hero">
-    <h1 id="hero-title">PRAJWAL NEUPANE</h1>
+    <h1>PRAJWAL NEUPANE</h1>
     <div class="underline"></div>
-    <div class="hero-sub show" id="hero-sub">
-      <h2>Geophysicist | Geologist</h2>
-      <p>Geophysics, Reflection Seismology, Tectonics</p>
-    </div>
+    <h2>Geophysicist | Geologist</h2>
+    <p>Geophysics, Reflection Seismology, Tectonics</p>
   </div>
 </header>
 
@@ -286,56 +268,13 @@
 
   <section id="photos">
     <h2 class="section-title">FIELD PHOTOS</h2>
-
-    <div class="album-tabs">
-      <a data-album="nmsz" class="active">New Madrid Seismic Zone</a>
-      <a data-album="butte">Butte Valley, CA</a>
-      <a data-album="hetauda">Hetauda Dun Valley, Nepal</a>
-      <a data-album="hft">Himalayan Frontal Thrust, Nepal</a>
-    </div>
-
-    <div class="album-panel active" id="album-nmsz">
-      <div class="photo-grid">
-        <div class="photo-placeholder">Photo 1</div>
-        <div class="photo-placeholder">Photo 2</div>
-        <div class="photo-placeholder">Photo 3</div>
-        <div class="photo-placeholder">Photo 4</div>
-        <div class="photo-placeholder">Photo 5</div>
-        <div class="photo-placeholder">Photo 6</div>
-      </div>
-    </div>
-
-    <div class="album-panel" id="album-butte">
-      <div class="photo-grid">
-        <div class="photo-placeholder">Photo 1</div>
-        <div class="photo-placeholder">Photo 2</div>
-        <div class="photo-placeholder">Photo 3</div>
-        <div class="photo-placeholder">Photo 4</div>
-        <div class="photo-placeholder">Photo 5</div>
-        <div class="photo-placeholder">Photo 6</div>
-      </div>
-    </div>
-
-    <div class="album-panel" id="album-hetauda">
-      <div class="photo-grid">
-        <div class="photo-placeholder">Photo 1</div>
-        <div class="photo-placeholder">Photo 2</div>
-        <div class="photo-placeholder">Photo 3</div>
-        <div class="photo-placeholder">Photo 4</div>
-        <div class="photo-placeholder">Photo 5</div>
-        <div class="photo-placeholder">Photo 6</div>
-      </div>
-    </div>
-
-    <div class="album-panel" id="album-hft">
-      <div class="photo-grid">
-        <div class="photo-placeholder">Photo 1</div>
-        <div class="photo-placeholder">Photo 2</div>
-        <div class="photo-placeholder">Photo 3</div>
-        <div class="photo-placeholder">Photo 4</div>
-        <div class="photo-placeholder">Photo 5</div>
-        <div class="photo-placeholder">Photo 6</div>
-      </div>
+    <div class="photo-grid">
+      <div class="photo-placeholder">Photo 1</div>
+      <div class="photo-placeholder">Photo 2</div>
+      <div class="photo-placeholder">Photo 3</div>
+      <div class="photo-placeholder">Photo 4</div>
+      <div class="photo-placeholder">Photo 5</div>
+      <div class="photo-placeholder">Photo 6</div>
     </div>
   </section>
 
@@ -389,16 +328,9 @@
   <section id="experience">
     <h2 class="section-title">WORK EXPERIENCE</h2>
     <div class="timeline-item">
-      <h3>Graduate Research Assistant</h3>
-      <div class="meta">Southern Methodist University, Dallas, USA · August 2022 – Present</div>
-      <ul>
-        <li>Conduct research on earthquake source characterization and crustal stress in the New Madrid Seismic Zone (NMSZ), central US, using focal mechanism analysis.</li>
-        <li>Analyze large seismic datasets using Python and ObsPy for processing and statistical analysis.</li>
-        <li>Perform Power Spectral Density and Probability Density Function calculations for different seismic networks in the central US to understand seasonal variability in ambient noise power.</li>
-        <li>Conduct multichannel seismic (MCS) data acquisition in Butte Valley, Northern California; perform data processing and geometry assignment using ProMax SeisSpace software and interpret results using Kingdom Suite.</li>
-        <li>Present research findings at national and international conferences.</li>
-        <li>Collaborate with faculty and external researchers on multidisciplinary geophysics projects.</li>
-      </ul>
+      <h3>[Job title]</h3>
+      <div class="meta">[Organization] · [Start date] – [End date]</div>
+      <p>[Brief description of responsibilities and achievements.]</p>
     </div>
     <div class="timeline-item">
       <h3>[Job title]</h3>
@@ -434,29 +366,13 @@
   document.getElementById('year').textContent = new Date().getFullYear();
   const links = document.querySelectorAll('.nav-links a');
   const sections = document.querySelectorAll('main section');
-  const heroTitle = document.getElementById('hero-title');
-  const heroSub = document.getElementById('hero-sub');
   links.forEach(link => {
     link.addEventListener('click', () => {
       links.forEach(l => l.classList.remove('active'));
       sections.forEach(s => s.classList.remove('active'));
       link.classList.add('active');
       document.getElementById(link.dataset.target).classList.add('active');
-      heroTitle.textContent = link.dataset.hero;
-      heroSub.classList.toggle('show', link.dataset.target === 'about');
       window.scrollTo({top:0, behavior:'smooth'});
-    });
-  });
-
-  // Field Photos album tabs
-  const albumTabs = document.querySelectorAll('.album-tabs a');
-  const albumPanels = document.querySelectorAll('.album-panel');
-  albumTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      albumTabs.forEach(t => t.classList.remove('active'));
-      albumPanels.forEach(p => p.classList.remove('active'));
-      tab.classList.add('active');
-      document.getElementById('album-' + tab.dataset.album).classList.add('active');
     });
   });
 
