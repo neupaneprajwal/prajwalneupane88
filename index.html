@@ -58,6 +58,8 @@
   .hero .underline{width:110px; height:4px; background:var(--accent); margin:16px 0 26px;}
   .hero h2{font-size:1.5rem; font-weight:500; margin-bottom:10px;}
   .hero p{font-size:1.05rem; color:#d6dae2;}
+  .hero-sub{display:none;}
+  .hero-sub.show{display:block;}
 
   /* MAIN CONTENT AREA */
   main{max-width:1100px; margin:0 auto; padding:50px 40px 100px;}
@@ -151,45 +153,27 @@
     color:var(--text-muted); font-size:.85rem; text-align:center; padding:12px;
     overflow:hidden;
   }
-  .photo-placeholder img{
-    width:100%; height:100%; object-fit:cover; border-radius:6px;
-    cursor:pointer; transition:transform .2s;
-  }
-  .photo-placeholder img:hover{transform:scale(1.03);}
+  .photo-placeholder img{width:100%; height:100%; object-fit:cover; border-radius:6px;}
 
-  /* LIGHTBOX */
-  .lightbox-overlay{
-    position:fixed; inset:0; background:rgba(10,12,16,0.93);
-    display:none; align-items:center; justify-content:center;
-    z-index:1000; padding:40px;
+  /* ALBUM TABS */
+  .album-tabs{
+    display:flex; gap:10px; flex-wrap:wrap; margin-bottom:26px;
+    border-bottom:1px solid #e3e6ec; padding-bottom:14px;
   }
-  .lightbox-overlay.active{display:flex;}
-  .lightbox-img{max-width:88vw; max-height:82vh; border-radius:6px; box-shadow:0 10px 40px rgba(0,0,0,0.5);}
-  .lightbox-close{
-    position:absolute; top:22px; right:28px; font-size:2rem; line-height:1;
-    color:#fff; background:none; border:none; cursor:pointer;
+  .album-tabs a{
+    padding:8px 16px; border-radius:20px; font-size:.9rem;
+    background:#e7eaf0; color:var(--text-muted); cursor:pointer;
+    transition:background .15s, color .15s;
   }
-  .lightbox-arrow{
-    position:absolute; top:50%; transform:translateY(-50%);
-    background:rgba(255,255,255,0.12); border:none; color:#fff;
-    font-size:1.6rem; width:50px; height:50px; border-radius:50%;
-    cursor:pointer; display:flex; align-items:center; justify-content:center;
-    transition:background .15s;
-  }
-  .lightbox-arrow:hover{background:rgba(255,255,255,0.28);}
-  .lightbox-prev{left:20px;}
-  .lightbox-next{right:20px;}
-  .lightbox-counter{
-    position:absolute; bottom:22px; left:50%; transform:translateX(-50%);
-    color:#d6dae2; font-size:.85rem;
-  }
-  @media(max-width:700px){
-    .lightbox-arrow{width:40px; height:40px; font-size:1.3rem;}
-    .lightbox-prev{left:8px;} .lightbox-next{right:8px;}
-  }
+  .album-tabs a:hover{background:#dde1e9;}
+  .album-tabs a.active{background:var(--accent); color:#fff; font-weight:600;}
+  .album-panel{display:none;}
+  .album-panel.active{display:block; animation:fade .3s ease;}
 
   .timeline-item{border-left:3px solid var(--accent); padding-left:20px; margin-bottom:26px; position:relative;}
   .timeline-item::before{content:""; position:absolute; left:-8px; top:2px; width:13px; height:13px; border-radius:50%; background:var(--accent);}
+  .timeline-item ul{margin:10px 0 0 20px; color:#3a4150; line-height:1.6;}
+  .timeline-item ul li{margin-bottom:6px;}
 
   footer{
     text-align:center; padding:30px; font-size:.85rem; color:var(--text-muted);
@@ -210,19 +194,21 @@
   <nav>
     <div class="site-title">prajwalneupane88.com.np</div>
     <div class="nav-links">
-      <a data-target="about" class="active">About</a>
-      <a data-target="research">Research</a>
-      <a data-target="photos">Field Photos</a>
-      <a data-target="publications">Publications</a>
-      <a data-target="experience">Work Experience</a>
-      <a data-target="notes">Notes</a>
+      <a data-target="about" data-hero="PRAJWAL NEUPANE" class="active">About</a>
+      <a data-target="research" data-hero="RESEARCH">Research</a>
+      <a data-target="photos" data-hero="FIELD PHOTOS">Field Photos</a>
+      <a data-target="publications" data-hero="PUBLICATIONS">Publications</a>
+      <a data-target="experience" data-hero="WORK EXPERIENCE">Work Experience</a>
+      <a data-target="notes" data-hero="NOTES">Notes</a>
     </div>
   </nav>
   <div class="hero">
-    <h1>PRAJWAL NEUPANE</h1>
+    <h1 id="hero-title">PRAJWAL NEUPANE</h1>
     <div class="underline"></div>
-    <h2>Geophysicist | Geologist</h2>
-    <p>Geophysics, Reflection Seismology, Tectonics</p>
+    <div class="hero-sub show" id="hero-sub">
+      <h2>Geophysicist | Geologist</h2>
+      <p>Geophysics, Reflection Seismology, Tectonics</p>
+    </div>
   </div>
 </header>
 
@@ -268,30 +254,91 @@
 
   <section id="photos">
     <h2 class="section-title">FIELD PHOTOS</h2>
-    <div class="photo-grid">
-      <div class="photo-placeholder">Photo 1</div>
-      <div class="photo-placeholder">Photo 2</div>
-      <div class="photo-placeholder">Photo 3</div>
-      <div class="photo-placeholder">Photo 4</div>
-      <div class="photo-placeholder">Photo 5</div>
-      <div class="photo-placeholder">Photo 6</div>
+
+    <div class="album-tabs">
+      <a data-album="nmsz" class="active">New Madrid Seismic Zone</a>
+      <a data-album="butte">Butte Valley, CA</a>
+      <a data-album="hetauda">Hetauda Dun Valley, Nepal</a>
+      <a data-album="conf">Conferences</a>
+    </div>
+
+    <div class="album-panel active" id="album-nmsz">
+      <div class="photo-grid">
+        <div class="photo-placeholder">Photo 1</div>
+        <div class="photo-placeholder">Photo 2</div>
+        <div class="photo-placeholder">Photo 3</div>
+        <div class="photo-placeholder">Photo 4</div>
+        <div class="photo-placeholder">Photo 5</div>
+        <div class="photo-placeholder">Photo 6</div>
+      </div>
+    </div>
+
+    <div class="album-panel" id="album-butte">
+      <div class="photo-grid">
+        <div class="photo-placeholder">Photo 1</div>
+        <div class="photo-placeholder">Photo 2</div>
+        <div class="photo-placeholder">Photo 3</div>
+        <div class="photo-placeholder">Photo 4</div>
+        <div class="photo-placeholder">Photo 5</div>
+        <div class="photo-placeholder">Photo 6</div>
+      </div>
+    </div>
+
+    <div class="album-panel" id="album-hetauda">
+      <div class="photo-grid">
+        <div class="photo-placeholder">Photo 1</div>
+        <div class="photo-placeholder">Photo 2</div>
+        <div class="photo-placeholder">Photo 3</div>
+        <div class="photo-placeholder">Photo 4</div>
+        <div class="photo-placeholder">Photo 5</div>
+        <div class="photo-placeholder">Photo 6</div>
+      </div>
+    </div>
+
+    <div class="album-panel" id="album-conf">
+      <div class="photo-grid">
+        <div class="photo-placeholder"><img src="AGU1.jpeg" alt="AGU conference"></div>
+        <div class="photo-placeholder"><img src="AGU2.jpeg" alt="AGU conference"></div>
+        <div class="photo-placeholder">Photo 3</div>
+        <div class="photo-placeholder">Photo 4</div>
+        <div class="photo-placeholder">Photo 5</div>
+        <div class="photo-placeholder">Photo 6</div>
+      </div>
+    </div>
+
     </div>
   </section>
 
   <section id="publications">
-    <h2 class="section-title">PUBLICATIONS</h2>
-
-    <a class="pub-card" href="https://doi.org/10.1785/0220250104" target="_blank" rel="noopener">
-      <h3>Mapping New Subsurface Faults in the Butte Valley, Northern California</h3>
-      <div class="pub-authors"><strong>Neupane, P.</strong>, Magnani, M.B., Fedotova, A., Claramunt, A. and Aggul, D.</div>
-      <div class="pub-meta">2025 · SSA Annual Meeting Abstracts</div>
-      <svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-    </a>
+    <h2 class="section-title">KEY PUBLICATIONS</h2>
 
     <a class="pub-card" href="https://doi.org/10.1007/s11069-024-06938-x" target="_blank" rel="noopener">
       <h3>Study of Ambient Noise for Seismic-Microzonation of the Eastern Part of Hetauda Dun Valley, Central Nepal</h3>
       <div class="pub-authors">Chamlagain, D., Acharya, S., <strong>Neupane, P.</strong> and Dhakal, N.R.</div>
       <div class="pub-meta">2025 · Natural Hazards</div>
+      <svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+    </a>
+
+    <a class="pub-card" href="https://doi.org/10.1016/j.jseaes.2019.01.008" target="_blank" rel="noopener">
+      <h3>Large himalayan frontal thrust paleoearthquake at Khayarmara in eastern Nepal</h3>
+      <div class="pub-authors">Wesnousky, S.G., Kumahara, Y., Chamlagain, D., <strong>Neupane, P.</strong></div>
+      <div class="pub-meta">2019 · Journal of Asian Earth Sciences</div>
+      <svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+    </a>
+
+    <a class="pub-card" href="https://doi.org/10.1002/2018GL077035Digital Object Identifier (DOI)" target="_blank" rel="noopener">
+      <h3>New observations disagree with previous interpretations of surface rupture along the Himalayan Frontal Thrust during the great 1934 Bihar‐Nepal earthquake</h3>
+      <div class="pub-authors">Wesnousky, S.G., Kumahara, Y., Nakata, T., Chamlagain, D., <strong>Neupane, P.</strong></div>
+      <div class="pub-meta">2019 · Geophysical Research Letters</div>
+      <svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+    </a>
+
+    <h2 class="section-title">CONFERENCES</h2>
+
+    <a class="pub-card" href="https://doi.org/10.1785/0220250104" target="_blank" rel="noopener">
+      <h3>Mapping New Subsurface Faults in the Butte Valley, Northern California</h3>
+      <div class="pub-authors"><strong>Neupane, P.</strong>, Magnani, M.B., Fedotova, A., Claramunt, A. and Aggul, D.</div>
+      <div class="pub-meta">2025 · SSA Annual Meeting Abstracts</div>
       <svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
     </a>
 
@@ -309,33 +356,47 @@
       <svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
     </a>
 
-    <a class="pub-card" href="https://doi.org/10.1016/j.jseaes.2019.01.008" target="_blank" rel="noopener">
-      <h3>Large himalayan frontal thrust paleoearthquake at Khayarmara in eastern Nepal</h3>
-      <div class="pub-authors">Wesnousky, S.G., Kumahara, Y., Chamlagain, D., Neupane, P.</div>
-      <div class="pub-meta">2019 · Journal of Asian Earth Sciences</div>
-      <svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-    </a>
-
-    <a class="pub-card" href="https://doi.org/10.1002/2018GL077035Digital Object Identifier (DOI)" target="_blank" rel="noopener">
-      <h3>New observations disagree with previous interpretations of surface rupture along the Himalayan Frontal Thrust during the great 1934 Bihar‐Nepal earthquake</h3>
-      <div class="pub-authors">Wesnousky, S.G., Kumahara, Y., Nakata, T., Chamlagain, D., Neupane, P.</div>
-      <div class="pub-meta">2019 · Geophysical Research Letters</div>
-      <svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-    </a>
-
   </section>
 
   <section id="experience">
     <h2 class="section-title">WORK EXPERIENCE</h2>
     <div class="timeline-item">
-      <h3>[Job title]</h3>
-      <div class="meta">[Organization] · [Start date] – [End date]</div>
-      <p>[Brief description of responsibilities and achievements.]</p>
+      <h3>Graduate Research Assistant</h3>
+      <div class="meta">Southern Methodist University, Dallas, USA · August 2022 – Present</div>
+      <ul>
+        <li>Conduct research on earthquake source characterization and crustal stress in the New Madrid Seismic Zone (NMSZ), central US, using focal mechanism analysis</li>
+        <li>Analyze large seismic datasets using Python and ObsPy for processing and statistical analysis</li>
+        <li>Perform Power Spectral Density and Probability Density Function calculations for different seismic networks in the central US to understand seasonal variability in ambient noise power</li>
+        <li>Conduct multichannel seismic (MCS) data acquisition in Butte Valley, Northern California; perform data processing and geometry assignment using ProMax SeisSpace software and interpret results using Kingdom Suite</li>
+        <li>Present research findings at national and international conferences</li>
+        <li>Collaborate with faculty and external researchers on multidisciplinary geophysics projects</li>
+      </ul>
     </div>
+
     <div class="timeline-item">
-      <h3>[Job title]</h3>
-      <div class="meta">[Organization] · [Start date] – [End date]</div>
-      <p>[Brief description of responsibilities and achievements.]</p>
+      <h3>Graduate Research Assistant</h3>
+      <div class="meta">Southern Methodist University, Dallas, USA · August 2022 – Present</div>
+      <ul>
+        <li>Instruct weekly undergraduate lab-based courses, including Oceanography and Earthquakes & Volcanoes</li>
+        <li>Prepare laboratory exercises and assess student reports and assignments</li>
+        <li>Mentor students in scientific data analysis and interpretation</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <h3>Geologist</h3>
+      <div class="meta">Hydro and Engineering Management Services, Kathmandu, Nepal · October 2020 – October 2021</div>
+      <ul>
+        <li>Conducted geological mapping and site investigations to assess the feasibility at different hydropower projects</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <h3>Graduate Research Assistant</h3>
+      <div class="meta">Tribhuvan University, Kathmandu, Nepal · August 2020 – 2021</div>
+      <ul>
+        <li>Conduct active fault mapping in the Hetauda Dun Valley, Central Nepal, using photogrammetry, drone survey, and field observations</li>
+      </ul>
     </div>
   </section>
 
@@ -350,14 +411,6 @@
 
 </main>
 
-<div class="lightbox-overlay" id="lightbox">
-  <button class="lightbox-close" id="lightbox-close" aria-label="Close">&times;</button>
-  <button class="lightbox-arrow lightbox-prev" id="lightbox-prev" aria-label="Previous photo">&#10094;</button>
-  <img class="lightbox-img" id="lightbox-img" src="" alt="">
-  <button class="lightbox-arrow lightbox-next" id="lightbox-next" aria-label="Next photo">&#10095;</button>
-  <div class="lightbox-counter" id="lightbox-counter"></div>
-</div>
-
 <footer>
   &copy; <span id="year"></span> Prajwal Neupane · prajwalneupane88.com.np
 </footer>
@@ -366,71 +419,31 @@
   document.getElementById('year').textContent = new Date().getFullYear();
   const links = document.querySelectorAll('.nav-links a');
   const sections = document.querySelectorAll('main section');
+  const heroTitle = document.getElementById('hero-title');
+  const heroSub = document.getElementById('hero-sub');
   links.forEach(link => {
     link.addEventListener('click', () => {
       links.forEach(l => l.classList.remove('active'));
       sections.forEach(s => s.classList.remove('active'));
       link.classList.add('active');
       document.getElementById(link.dataset.target).classList.add('active');
+      heroTitle.textContent = link.dataset.hero;
+      heroSub.classList.toggle('show', link.dataset.target === 'about');
       window.scrollTo({top:0, behavior:'smooth'});
     });
   });
 
-  // Photo lightbox with prev/next navigation
-  (function(){
-    const overlay = document.getElementById('lightbox');
-    const imgEl = document.getElementById('lightbox-img');
-    const counterEl = document.getElementById('lightbox-counter');
-    const btnClose = document.getElementById('lightbox-close');
-    const btnPrev = document.getElementById('lightbox-prev');
-    const btnNext = document.getElementById('lightbox-next');
-    let currentImages = [];
-    let currentIndex = 0;
-
-    function updateLightbox(){
-      imgEl.src = currentImages[currentIndex].src;
-      imgEl.alt = currentImages[currentIndex].alt || '';
-      counterEl.textContent = (currentIndex + 1) + ' / ' + currentImages.length;
-    }
-    function openLightbox(images, index){
-      currentImages = images;
-      currentIndex = index;
-      updateLightbox();
-      overlay.classList.add('active');
-    }
-    function closeLightbox(){
-      overlay.classList.remove('active');
-      imgEl.src = '';
-    }
-    function showPrev(){
-      currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
-      updateLightbox();
-    }
-    function showNext(){
-      currentIndex = (currentIndex + 1) % currentImages.length;
-      updateLightbox();
-    }
-
-    document.querySelectorAll('.photo-grid').forEach(grid => {
-      grid.querySelectorAll('img').forEach(img => {
-        img.addEventListener('click', () => {
-          const images = Array.from(grid.querySelectorAll('img'));
-          openLightbox(images, images.indexOf(img));
-        });
-      });
+  // Field Photos album tabs
+  const albumTabs = document.querySelectorAll('.album-tabs a');
+  const albumPanels = document.querySelectorAll('.album-panel');
+  albumTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      albumTabs.forEach(t => t.classList.remove('active'));
+      albumPanels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('album-' + tab.dataset.album).classList.add('active');
     });
-
-    btnClose.addEventListener('click', closeLightbox);
-    btnPrev.addEventListener('click', showPrev);
-    btnNext.addEventListener('click', showNext);
-    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeLightbox(); });
-    document.addEventListener('keydown', (e) => {
-      if (!overlay.classList.contains('active')) return;
-      if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowLeft') showPrev();
-      if (e.key === 'ArrowRight') showNext();
-    });
-  })();
+  });
 </script>
 
 </body>
