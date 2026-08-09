@@ -516,12 +516,6 @@
   const sections = document.querySelectorAll('main section');
   const heroTitle = document.getElementById('hero-title');
   const heroSub = document.getElementById('hero-sub');
-  const heroUnderline = document.getElementById('hero-underline');   // ADD
-  function syncUnderline(){                                          // ADD
-    heroUnderline.style.width = heroTitle.offsetWidth + 'px';         // ADD
-  }                                                                    // ADD
-  syncUnderline();                                                    // ADD
-
   links.forEach(link => {
     link.addEventListener('click', () => {
       links.forEach(l => l.classList.remove('active'));
@@ -530,11 +524,10 @@
       document.getElementById(link.dataset.target).classList.add('active');
       heroTitle.textContent = link.dataset.hero;
       heroSub.classList.toggle('show', link.dataset.target === 'about');
-      syncUnderline();                                                // ADD
       window.scrollTo({top:0, behavior:'smooth'});
     });
   });
-  
+
   // Field Photos album tabs
   const albumTabs = document.querySelectorAll('.album-tabs a');
   const albumPanels = document.querySelectorAll('.album-panel');
