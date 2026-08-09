@@ -87,6 +87,15 @@
     background:#e7eaf0; display:flex; align-items:center; justify-content:center;
     font-size:1rem; color:var(--text-dark);
   }
+
+  .social-icons a.cv-badge{
+  width:auto; height:38px; padding:0 14px; border-radius:8px;
+  background:#dde6ff; color:var(--accent); font-weight:600; font-size:.9rem;
+  gap:6px;
+  }
+
+  .social-icons a.cv-badge svg{width:16px; height:16px; flex-shrink:0;}
+
   .edu-line{margin:14px 0; font-size:1.02rem;}
   .about-text p{margin:16px 0; line-height:1.7; color:#3a4150;}
   .placeholder-note{
@@ -265,7 +274,17 @@
         <div class="about-header-row">
           <h2 class="section-title" style="margin-bottom:0;">About Me</h2>
           <div class="social-icons">
-            <a href="https://drive.google.com/file/d/1uPU3CP3jUhLzbok3YnfNe5KovZSo0Q8z/view?usp=drive_link" title="CV" target="_blank" rel="noopener">CV</a>
+            <a href="https://drive.google.com/file/d/1uPU3CP3jUhLzbok3YnfNe5KovZSo0Q8z/view?usp=drive_link"
+              class="cv-badge" title="CV" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+              CV
+            </a>     
             <a href="mailto:prajwalneupane52@gmail.com" title="Email">✉</a>
             <a href="https://www.linkedin.com/in/prajwal-neupane52/" title="LinkedIn" target="_blank" rel="noopener">in</a>
             <a href="https://scholar.google.com/citations?user=23WU3WYAAAAJ&hl=en" title="Google Scholar" target="_blank" rel="noopener">🎓</a>
