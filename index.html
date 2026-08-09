@@ -56,7 +56,7 @@
     max-width:900px;
   }
   .hero h1{font-size:3.2rem; letter-spacing:1px; font-weight:800;}
-  .hero .underline{width:110px; height:4px; background:var(--accent); margin:16px 0 26px;}
+  .hero .underline{height:4px; background:var(--accent); margin:16px 0 26px;}
   .hero h2{font-size:1.5rem; font-weight:500; margin-bottom:10px;}
   .hero p{font-size:1.05rem; color:#d6dae2;}
   .hero-sub{display:none;}
@@ -248,7 +248,7 @@
   </nav>
   <div class="hero">
     <h1 id="hero-title">PRAJWAL NEUPANE</h1>
-    <div class="underline"></div>
+    <div class="underline" id="hero-underline"></div>
     <div class="hero-sub show" id="hero-sub">
       <h2>Geophysicist | Geologist</h2>
       <p>Geophysics, Reflection Seismology, Tectonics</p>
@@ -516,6 +516,12 @@
   const sections = document.querySelectorAll('main section');
   const heroTitle = document.getElementById('hero-title');
   const heroSub = document.getElementById('hero-sub');
+  const heroUnderline = document.getElementById('hero-underline');   // ADD
+  function syncUnderline(){                                          // ADD
+    heroUnderline.style.width = heroTitle.offsetWidth + 'px';         // ADD
+  }                                                                    // ADD
+  syncUnderline();                                                    // ADD
+
   links.forEach(link => {
     link.addEventListener('click', () => {
       links.forEach(l => l.classList.remove('active'));
@@ -524,10 +530,11 @@
       document.getElementById(link.dataset.target).classList.add('active');
       heroTitle.textContent = link.dataset.hero;
       heroSub.classList.toggle('show', link.dataset.target === 'about');
+      syncUnderline();                                                // ADD
       window.scrollTo({top:0, behavior:'smooth'});
     });
   });
-
+  
   // Field Photos album tabs
   const albumTabs = document.querySelectorAll('.album-tabs a');
   const albumPanels = document.querySelectorAll('.album-panel');
